@@ -90,7 +90,6 @@ func Start(addr string, secret string) {
 	}
 	serverAddr = l.Addr().String()
 	log.Infoln("RESTful API listening at: %s", serverAddr)
-	if err = http.Serve(l, r); err != nil {
 		log.Errorln("External controller serve error: %s", err)
 	}
 }
