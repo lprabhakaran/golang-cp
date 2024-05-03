@@ -71,28 +71,7 @@ func Start(addr string, secret string) {
 		r.Mount("/rules", ruleRouter())
 		r.Mount("/connections", connectionRouter())
 		r.Mount("/providers/proxies", proxyProviderRouter())
-	})
-
-	if uiPath != "" {
-		r.Group(func(r chi.Router) {
-			fs := http.StripPrefix("/ui", http.FileServer(http.Dir(uiPath)))
-			r.Get("/ui", http.RedirectHandler("/ui/", http.StatusTemporaryRedirect).ServeHTTP)
-			r.Get("/ui/*", func(w http.ResponseWriter, r *http.Request) {
-				fs.ServeHTTP(w, r)
-			})
-		})
-	}
-
-	l, err := net.Listen("tcp", addr)
-	if err != nil {
-		log.Errorln("External controller listen error: %s", err)
-		return
-	}
-	serverAddr = l.Addr().String()
-	log.Infoln("RESTful API listening at: %s", serverAddr)
-	}
-}
-
+	
 func authentication(next http.Handler) http.Handler {
 	fn := func(w http.ResponseWriter, r *http.Request) {
 		if serverSecret == "" {
