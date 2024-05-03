@@ -143,7 +143,6 @@ func TestClash_ShadowsocksV2RayPlugin(t *testing.T) {
 		Name:     "ss",
 		Server:   localIP.String(),
 		Port:     10002,
-		Password: "FzcLbKs2dY9mhL",
 		Cipher:   "chacha20-ietf-poly1305",
 		UDP:      true,
 		Plugin:   "v2ray-plugin",
